@@ -1,0 +1,47 @@
+* {
+	font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", sans-serif;
+	font-size: 13px;
+}
+
+/*estados da cpu*/
+#cpu {
+	color: #a6e3a1; 
+}
+
+#cpu.attention {
+	color: #a9e1a5;
+}
+
+#cpu.warning {
+	color: #f9e2af; 
+}
+
+#cpu.critical {
+	color: #f38ba8; 
+}
+
+/*estados da memoria*/
+#memory {
+	color: #a6e3a1; 
+}
+
+#memory.attention {
+	color: #a9e1a5;
+}
+
+#memory.warning {
+	color: #f9e2af; 
+}
+
+#memory.critical {
+	color: #f38ba8; 
+}
+
+/*internet*/
+#network {
+    color: #89b4fa; 
+}
+
+#network.disconnected {
+    color: #f38ba8; 
+}

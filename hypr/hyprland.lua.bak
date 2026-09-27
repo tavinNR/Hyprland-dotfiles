@@ -1,0 +1,65 @@
+-- monitores --
+hl.monitor ({
+	output = "DP-1"
+	mode = "1920x1080@165"
+	position = "0x0"
+	scale = "1"
+})
+
+-- variáveis de ambiente nvidia --
+
+hl.env("LIBVA_DRIVER_NAME", "nvidia")
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+hl.env("NVD_BACKEND","direct")
+
+-- teclado + mouse --
+hl.input ({
+	kb_layout = "br"
+	kb_variant = ""
+	follow_mouse = 2
+})
+
+hl.cursor ({
+	no_hardware_cursors = 1
+})
+
+-- inicialização --
+hl.exec_once("swww-daemon --no-cache")
+hl.exec_once("waybar")
+
+-- binds --
+	-- mouse -- 
+hl.bind("ALT + mouse:272", hl.dsp.window.drag(),   { mouse = true }) --272 = LMB
+hl.bind("ALT + mouse:273", hl.dsp.window.resize(), { mouse = true }) --273 = RMB
+
+	-- controle de janelas
+hl.bind("main + Q", hl.dsp.window.close({}))
+hl.bind("SUPER + RETURN", hl.dsp.exec_cmd("rofi -show drun"))
+hl.bind("ALT + TAB", hl.dsp.exec_cmd("rofi -show window"))
+
+	-- apps -- 
+hl.bind("SUPER + T", hl.dsp.exec_cmd("ghostty") )
+hl.bind("SUPER + B", hl.dsp.exec_cmd("zen-browser") )
+	
+	-- mídia --
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"), { repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"), { repeating = true })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),{ locked = true })
+hl.bind("XF86AudioPlay",	hl.dsp.exec_cmd("playerctl play-pause"), 		      { locked = true })
+hl.bind("XF86AudioPrev", 	hl.dsp.exec_cmd("playerctl previous"),   		      { locked = true })
+hl.bind("XF86AudioNext", 	hl.dsp.exec_cmd("playerctl next"),       	  	      { locked = true })
+
+	-- workspace --
+hl.bind("SUPER + SHIFT + M", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind("SUPER + M", hl.dsp.workspace.toggle_special("magic"))
+hl.bind("ALT + left", hl.dsp.focus({ direction = "l" }))
+hl.bind("ALT + right", hl.dsp.focus({ direction = "r" }))
+hl.bind("ALT + up", hl.dsp.focus({ direction = "u" }))
+hl.bind("ALT + down", hl.dsp.focus({ direction = "d" }))
+hl.bind("SUPER + SHIFT + right", hl.dsp.move({ workspace = "+1" }))
+hl.bind("SUPER + SHIFT + left", hl.dsp.move({ workspace = "-1" }))
+hl.bind("SUPER + right", hl.dsp.focus({ workspace = "+1" }))
+hl.bind("SUPER + left", hl.dsp.focus({ workspace = "-1" }))
+	
+-- animações --
+

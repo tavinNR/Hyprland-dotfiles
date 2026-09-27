@@ -1,0 +1,84 @@
+{
+	//posição
+	"position": "top",
+	"layer": "top",
+	"output": ["DP-1"],
+	"height": 24,
+	"spacing": 8,
+
+	//conteúdo
+	"modules-left":[
+		"hyprland/workspaces",
+		"tray"
+	],
+
+	"modules-center":[
+		"clock"
+	],
+
+	"modules-right":[
+		"cpu",
+		"memory",
+		"pulseaudio",
+		"network"
+	],
+
+	//configuração dos módulos
+	
+	//aplicativos abertos
+	"tray": {
+		"icon-size": 15,
+		"spacing": 8
+	},
+	
+	//relógio
+	"clock": {
+		"format":"{:%H:%M}",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode": "month",             // Modo inicial: "year" ou "month"
+    			"on-scroll": 1,              // Muda de mês scrollando
+    			"format": {
+        			"months": "<span color='#ffead3'><b>{}</b></span>",
+        			"days": "<span color='#ecc6d9'><b>{}</b></span>",
+        			"weekdays": "<span color='#ffcc00'><b>{}</b></span>",
+        			"today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+    			}
+		}
+	},
+	
+
+	//cpu
+	"cpu": {
+    		"interval": 1,
+    		"format": "{icon} {usage}%",
+    		"format-icons": [""],
+		"states": { "attention": 35,"warning": 70, "critical": 90 }
+	},
+
+	//ram
+	"memory": {
+		"interval": 1,
+		"format": " {percentage}%",
+		"states": {"attention": 35, "warning": 70, "critical": 90},
+		"tooltip-format": "{used:0.1f}GB\n____\n{total:0.1f}GB"
+	},
+	//internet
+	"network": {
+		"interval": 2,
+		"format-ethernet": "󰈀 ON ",
+		"format-disconnected": "󰈂 OFF "
+	},
+
+	//audio
+	"pulseaudio": {
+    	"format": "{icon} {volume}%",
+    	"format-muted": "󰝟 Muted",
+    	"format-icons": {
+		"default": ["󰕿", "󰖀", "󰕾"]
+    	},
+    	"on-click": "pavucontrol"
+	}
+
+	
+}

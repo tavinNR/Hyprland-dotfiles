@@ -1,8 +1,8 @@
 -- monitores --
 hl.monitor ({
-	output = "DP-1"
-	mode = "1920x1080@165"
-	position = "0x0"
+	output = "DP-1",
+	mode = "1920x1080@165",
+	position = "0x0",
 	scale = "1"
 })
 
@@ -13,27 +13,37 @@ hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 hl.env("NVD_BACKEND","direct")
 
 -- teclado + mouse --
-hl.input ({
-	kb_layout = "br"
-	kb_variant = ""
-	follow_mouse = 2
-})
+hl.config ({
+	input = {
 
-hl.cursor ({
-	no_hardware_cursors = 1
+		kb_layout = "br",
+		kb_variant = "",
+		follow_mouse = 2,
+	},
+	cursor = {
+		no_hardware_cursors = 1,
+	}
 })
 
 -- inicialização --
-hl.exec_once("swww-daemon --no-cache")
-hl.exec_once("waybar")
+
+hl.on("hyprland.start", function () 
+	hl.exec_cmd("waybar")
+	hl.exec_cmd("swww-daemon --no-cache")
+end)
 
 -- binds --
+	-- print --
+hl.bind("Print", hl.dsp.exec_cmd("grim -g"))
+
+hl.bind("SHIFT + Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" ~/pics/Print_$(date +'%Y-%m-%d_%H-%M-%S').png"))
+
 	-- mouse -- 
 hl.bind("ALT + mouse:272", hl.dsp.window.drag(),   { mouse = true }) --272 = LMB
 hl.bind("ALT + mouse:273", hl.dsp.window.resize(), { mouse = true }) --273 = RMB
 
 	-- controle de janelas
-hl.bind("main + Q", hl.dsp.window.close({}))
+local closeWindowBind = hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + RETURN", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind("ALT + TAB", hl.dsp.exec_cmd("rofi -show window"))
 
@@ -56,10 +66,9 @@ hl.bind("ALT + left", hl.dsp.focus({ direction = "l" }))
 hl.bind("ALT + right", hl.dsp.focus({ direction = "r" }))
 hl.bind("ALT + up", hl.dsp.focus({ direction = "u" }))
 hl.bind("ALT + down", hl.dsp.focus({ direction = "d" }))
-hl.bind("SUPER + SHIFT + right", hl.dsp.move({ workspace = "+1" }))
-hl.bind("SUPER + SHIFT + left", hl.dsp.move({ workspace = "-1" }))
+hl.bind("SUPER + SHIFT + right", hl.dsp.window.move({ workspace = "+1" }))
+hl.bind("SUPER + SHIFT + left", hl.dsp.window.move({ workspace = "-1" }))
 hl.bind("SUPER + right", hl.dsp.focus({ workspace = "+1" }))
 hl.bind("SUPER + left", hl.dsp.focus({ workspace = "-1" }))
 	
 -- animações --
-
